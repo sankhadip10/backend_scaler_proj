@@ -1,10 +1,8 @@
 package com.productservice.productservice.controllers;
 
-import com.productservice.productservice.dtos.FakeStoreProductDto;
 import com.productservice.productservice.dtos.GenericProductDto;
-import com.productservice.productservice.services.FakeStoreProductService;
+import com.productservice.productservice.exception.ProductNotFoundException;
 import com.productservice.productservice.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +21,7 @@ public class ProductController {
 
     //localhost:8080/products/123
     @GetMapping("/{id}")
-    public GenericProductDto getProductById(@PathVariable("id")Long id){
+    public GenericProductDto getProductById(@PathVariable("id")Long id) throws ProductNotFoundException {
        //call the FakeStoreProductService getProductById() method
 //        return "Scaler || Product fetched with id: "+id;
         return productService.getProductById(id);
@@ -33,8 +31,8 @@ public class ProductController {
         return productService.getAllProducts();
     }
     @DeleteMapping("/{id}")
-    public void deleteProductById(){
-
+    public GenericProductDto deleteProductById(@PathVariable("id")Long id){
+        return productService.deleteProductById(id);
     }
     @PostMapping
     public GenericProductDto createProduct(@RequestBody GenericProductDto genericProductDto){
@@ -44,6 +42,19 @@ public class ProductController {
     public void updateProductById(){
 
     }
+//    @ExceptionHandler(ProductNotFoundException.class)
+//    private ResponseEntity<ExceptionDto> handleProductNotFoundException(ProductNotFoundException productNotFoundException) {
+//
+//        ExceptionDto exceptionDto = new ExceptionDto();
+//        exceptionDto.setMessage(productNotFoundException.getMessage());
+//        exceptionDto.setHttpStatus(HttpStatus.NOT_FOUND);
+////        return new ResponseEntity<>(
+////                exceptionDto,
+////                HttpStatus.NOT_FOUND
+////        ).getBody();
+//        ResponseEntity responseEntity = new ResponseEntity(exceptionDto,HttpStatus.NOT_FOUND);
+//        return responseEntity;
+//    }
 }
 
 //3 ways of Dependency injection
