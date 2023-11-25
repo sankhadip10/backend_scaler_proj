@@ -4,6 +4,7 @@ import com.productservice.productservice.dtos.FakeStoreProductDto;
 import com.productservice.productservice.dtos.GenericProductDto;
 import com.productservice.productservice.exception.ProductNotFoundException;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -97,7 +98,29 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public void updateProductById() {
+    public GenericProductDto updateProductById(Long id, GenericProductDto genericProductDto) throws ProductNotFoundException {
+        RestTemplate restTemplate = restTemplateBuilder.build();
 
+        // Create an HttpEntity that contains the request body and headers
+        HttpEntity<GenericProductDto> requestEntity = new HttpEntity<>(genericProductDto);
+
+        // Use the exchange method of RestTemplate
+        ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.exchange(
+                specificProductUrl,
+                HttpMethod.PUT,
+                requestEntity,
+                FakeStoreProductDto.class,
+                id
+        );
+
+        // Check if response body is null
+        if (responseEntity.getBody() == null) {
+            // Handle the case where there is no response body, perhaps throw an exception
+            throw new ProductNotFoundException("Failed to update product with id: " + id);
+        }
+
+        // Convert and return the response body
+        return convertToGenericProductDto(responseEntity.getBody());
     }
+
 }

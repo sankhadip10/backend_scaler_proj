@@ -39,7 +39,10 @@ public class ProductController {
         return productService.createProduct(genericProductDto);
 //        return null;
     }
-    public void updateProductById(){
+    @PutMapping("/{id}")
+    public GenericProductDto updateProductById(@PathVariable("id") Long id,
+                                               @RequestBody GenericProductDto genericProductDto) throws ProductNotFoundException {
+        return productService.updateProductById(id,genericProductDto);
 
     }
 //    @ExceptionHandler(ProductNotFoundException.class)

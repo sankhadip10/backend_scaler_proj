@@ -1,13 +1,11 @@
-package com.productservice.productservice.services;
+package com.productservice.productservice.thirdPartyClients;
 
-import com.productservice.productservice.dtos.FakeStoreProductDto;
 import com.productservice.productservice.dtos.GenericProductDto;
 import com.productservice.productservice.exception.ProductNotFoundException;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-public interface ProductService {
+public interface ThirdPartyInterface {
     GenericProductDto getProductById(Long id) throws ProductNotFoundException;
     List<GenericProductDto> getAllProducts();
 
