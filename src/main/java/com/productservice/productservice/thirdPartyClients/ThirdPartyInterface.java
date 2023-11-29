@@ -10,6 +10,7 @@ public interface ThirdPartyInterface {
     List<GenericProductDto> getAllProducts();
 
     GenericProductDto deleteProductById(Long id);
+
     GenericProductDto createProduct(GenericProductDto genericProductDto);
     GenericProductDto updateProductById(Long id,GenericProductDto genericProductDto) throws ProductNotFoundException;
 }
