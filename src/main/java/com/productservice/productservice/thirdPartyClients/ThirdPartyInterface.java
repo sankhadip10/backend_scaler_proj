@@ -14,3 +14,4 @@ public interface ThirdPartyInterface {
     GenericProductDto createProduct(GenericProductDto genericProductDto);
     GenericProductDto updateProductById(Long id,GenericProductDto genericProductDto) throws ProductNotFoundException;
 }
+
