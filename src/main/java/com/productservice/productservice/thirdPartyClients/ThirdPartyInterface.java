@@ -15,3 +15,4 @@ public interface ThirdPartyInterface {
     GenericProductDto updateProductById(Long id,GenericProductDto genericProductDto) throws ProductNotFoundException;
 }
 
+
