@@ -18,16 +18,24 @@ import java.util.List;
 @Component
 public class FakeStoreClientAdapter {
     private RestTemplateBuilder restTemplateBuilder;
-//    @Value("${fakestore.api.url}")
-//    private String fakeStoreUrl;
-//
-//    @Value("${fakestore.api.paths.products}")
-////    private String pathForProducts;
-    private  String specificProductUrl ="https://fakestoreapi.com/products/{id}";
-    private  String genericProductUrl ="https://fakestoreapi.com/products";
+    @Value("${fakestore.api.url}")
+    private String fakeStoreUrl;
 
-    FakeStoreClientAdapter(RestTemplateBuilder restTemplateBuilder){
+    @Value("${fakestore.api.paths.products}")
+    private String pathForProducts;
+    private  String specificProductUrl;
+//    = fakeStoreUrl + pathForProducts + "/{id}";
+//            "https://fakestoreapi.com/products/{id}";
+    private  String genericProductUrl;
+//    = fakeStoreUrl + pathForProducts;
+//        "https://fakestoreapi.com/products";
+
+    FakeStoreClientAdapter(RestTemplateBuilder restTemplateBuilder,
+                           @Value("${fakestore.api.url}") String fakeStoreUrl,
+                           @Value("${fakestore.api.paths.products}") String pathForProducts){
         this.restTemplateBuilder=restTemplateBuilder;
+        this.genericProductUrl = fakeStoreUrl + pathForProducts;
+        this.specificProductUrl = fakeStoreUrl + pathForProducts +"/{id}";
     }
 
 
