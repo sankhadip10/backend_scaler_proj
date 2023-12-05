@@ -59,5 +59,6 @@ public class ProductServiceApplication implements CommandLineRunner {
             System.out.println(user1.toString());
         }
 
+
     }
 }
