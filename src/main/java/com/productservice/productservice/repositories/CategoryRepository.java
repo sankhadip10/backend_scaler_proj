@@ -10,4 +10,5 @@ import java.util.UUID;
 public interface CategoryRepository extends JpaRepository<Category, UUID> {
 //    @Override
 //    <S extends CategoryRepository> S save(S entity);
+
 }
