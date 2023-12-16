@@ -21,6 +21,9 @@ public class BaseModel {
     private UUID id;
 
 }
+class Solution:
+        def isAnagram(self, s: str, t: str) -> bool:
+        return Counter(s) == Counter(t)
 
 
 
