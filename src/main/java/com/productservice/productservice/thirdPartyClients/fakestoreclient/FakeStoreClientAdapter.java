@@ -50,6 +50,7 @@ public class FakeStoreClientAdapter {
         if (fakeStoreProductDto == null){
             //Throw an exception.
             throw new ProductNotFoundException("Product with id: "+id+" doesn't exist");
+//            return null;
         }
         //convert FakeStoreProductDto to GenericProductDto before returning
         return fakeStoreProductDto;
